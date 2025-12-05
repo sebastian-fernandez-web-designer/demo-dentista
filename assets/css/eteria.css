@@ -1,0 +1,34 @@
+body.loading {
+  overflow: hidden;
+}
+
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--dental-dark, #0f172a);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+.letters-container {
+  display: flex;
+  overflow: hidden;
+}
+
+#preloader span {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2rem, 5vw, 5rem);
+  /*Responsive: grande en PC, adaptable en móvil;*/
+  font-weight: 700;
+  color: white;
+  opacity: 0;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
