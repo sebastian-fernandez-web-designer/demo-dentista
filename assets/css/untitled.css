@@ -70,7 +70,7 @@ p, .small, .text-muted, .text-secondary {
 
 .top-bar {
   background-color: var(--topbar-bg) !important;
-  position: fixed;
+  position: absolute;
   /*top: 0;*/
   left: 0;
   width: 100%;
@@ -127,6 +127,7 @@ p, .small, .text-muted, .text-secondary {
   border-radius: 50px;
   transition: all 0.3s;
   box-shadow: 0 4px 15px rgba(0, 180, 216, 0.3);
+  align-items: center;
 }
 
 .btn-primary-dental:hover {
