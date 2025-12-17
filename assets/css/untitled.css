@@ -26,6 +26,10 @@
   --map-bg: #334155;
 }
 
+html, body {
+  overflow-x: hidden; /* Oculta el desbordamiento horizontal */
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   color: var(--text-body);
