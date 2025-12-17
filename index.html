@@ -19,6 +19,102 @@
   <link rel="stylesheet" href="assets/css/eteria.css?h=6472211c72f510aaad9358dcc92fcc80">
   <link rel="stylesheet" href="assets/css/Page-to-top.css?h=b1915b8a358585a28445d1fe918a1dbe">
   <link rel="stylesheet" href="assets/css/untitled.css?h=acaaabfbd0ac1c477651ddd87128644e">
+
+  <style>
+/* Barra inferior tipo Apple */
+.cookie-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    padding: 16px 20px;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all .35s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Mostrar */
+.cookie-bar.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ocultar */
+.cookie-bar.hidden {
+    display: none;
+}
+
+.cookie-bar-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.cookie-text {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #4a5568;
+    line-height: 1.4;
+}
+
+/* Botones */
+.cookie-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.cookie-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+    transition: all .2s ease;
+}
+
+/* Aceptar */
+.cookie-btn.accept {
+    background: #00b4d8;
+    color: white;
+}
+
+.cookie-btn.accept:hover {
+    background: #0096c7;
+}
+
+/* Rechazar */
+.cookie-btn.decline {
+    background: #e9ecef;
+    color: #023047;
+}
+
+.cookie-btn.decline:hover {
+    background: #dce0e3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cookie-bar-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cookie-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+</style>
+
 </head>
 
 <body>
@@ -464,6 +560,20 @@
   </div><a href="#top">
     <div id="scroll-to-top"><i class="fas fa-tooth" style="color: rgb(0,180,216);"></i></div>
   </a>
+  <!-- Banner de Cookies -->
+  <div id="cookie-banner" class="cookie-bar hidden">
+    <div class="cookie-bar-content">
+        <p class="cookie-text">
+            Usamos cookies para mejorar tu experiencia y ofrecer un servicio más preciso.
+        </p>
+
+        <div class="cookie-actions">
+            <button id="accept-cookies" class="cookie-btn accept">Aceptar</button>
+            <button id="close-cookies" class="cookie-btn decline">Rechazar</button>
+        </div>
+    </div>
+</div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="assets/js/bs-init.js?h=d0c6de1d0ecd5065d55e7b94664b5b10"></script>
@@ -472,6 +582,33 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="assets/js/modal.js?h=91779145b9467508a228bc69a9985ad3"></script>
   <script src="assets/js/Page-to-top-scroll.js?h=fcb5b6c625edf3b2e8cceedf166a2421"></script>
+  <script>
+    window.addEventListener("load", () => {
+        const banner = document.getElementById("cookie-banner");
+        const acceptBtn = document.getElementById("accept-cookies");
+        const closeBtn = document.getElementById("close-cookies");
+    
+        // Espera 2 segundos DESPUÉS de que todo cargó (incluyendo preloader)
+        if (!localStorage.getItem("cookiesAccepted")) {
+            setTimeout(() => {
+                banner.classList.remove("hidden");
+                banner.classList.add("show");
+            }, 3000); // 2000ms = 2 segundos
+        }
+    
+        acceptBtn.addEventListener("click", () => {
+            localStorage.setItem("cookiesAccepted", "true");
+            banner.classList.remove("show");
+            setTimeout(() => banner.classList.add("hidden"), 300);
+        });
+    
+        closeBtn.addEventListener("click", () => {
+            banner.classList.remove("show");
+            setTimeout(() => banner.classList.add("hidden"), 300);
+        });
+    });
+    </script>
+    
 </body>
 
 </html>
